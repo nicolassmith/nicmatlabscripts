@@ -15,7 +15,7 @@ if flagIndex
     varargin = {varargin{1:end~=flagIndex}}; % remove options from the arguments
 end
 
-colorlist = {'r','b','g','c','m','y','k'};
+colorlist = {'k','r','b','g','c','m','y'};
 for j=1:length(varargin)
     M=varargin{j};
     subplot(2,1,1)
@@ -23,9 +23,9 @@ for j=1:length(varargin)
     hold on
     subplot(2,1,2)
     if(unwrapflag)
-        semilogx(M(:,1),180/pi*unwrap(angle(M(:,2))),colorlist{mod(j,length(colorlist))})
+        semilogx(M(:,1),180/pi*unwrap(angle(M(:,2))),colorlist{mod(j,length(colorlist))+1})
     else
-        semilogx(M(:,1),180/pi*angle(M(:,2)),colorlist{mod(j,length(colorlist))})
+        semilogx(M(:,1),180/pi*angle(M(:,2)),colorlist{mod(j,length(colorlist))+1})
     end
     hold on
     maxnow = max(M(:,1));
