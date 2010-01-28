@@ -28,5 +28,5 @@ end
 
 S=load(newF);
 fldname = char(fieldnames(S));
-M=getfield(S,fldname); %#ok<GFLD>
+M=S.(fldname); 
 
