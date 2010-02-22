@@ -10,7 +10,11 @@ function data_out = blrmsseries(data_in,BP,LP)
 
 % first bandpass the data using BP
 passed = filter(BP,data_in);
-
+fs=16384;
+A = asd(passed,fs,0.25);
+figure(1)
+loglog(A.f,A.x)
+hold on
 % square
 squared = passed.^2;
 
