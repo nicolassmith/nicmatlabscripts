@@ -1,4 +1,8 @@
 function SRSbode(varargin)
+% make bode plot of exported SRS plot in .mat format
+% input is nx2 matrix, first column is frequencies, second is complex
+% transfer function value.
+
 
 % check for options
 unwrapflag = 0;
