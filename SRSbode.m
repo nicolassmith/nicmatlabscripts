@@ -23,7 +23,7 @@ colorlist = {'k','r','b','g','c','m','y'};
 for j=1:length(varargin)
     M=varargin{j};
     subplot(2,1,1)
-    loglog(M(:,1),abs(M(:,2)),colorlist{mod(j,length(colorlist))})
+    loglog(M(:,1),abs(M(:,2)),colorlist{mod(j,length(colorlist))+1})
     hold on
     subplot(2,1,2)
     if(unwrapflag)
@@ -60,4 +60,6 @@ else
 end
 grid on
 hold off
+
+subplot(2,1,1) % end with mag selscted
 
