@@ -1,8 +1,9 @@
 
 function varargout = applytfinterp(TF,ASD)
-%applies a transfer function linearly interpolated between points
-%to asd.
-
+% varargout = applytfinterp(TF,ASD)
+% applies a transfer function linearly interpolated between points
+% to asd.
+%
 % TF and ASD should be two column matrix with frequency in first column,
 % second column should be ASD or complex TF.
 
