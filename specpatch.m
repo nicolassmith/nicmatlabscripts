@@ -1,8 +1,16 @@
 function fullspec = specpatch(varargin)
 % input many spectra as arguments and this function will patch them together. 
 % low frequency spectra get priority. first column should be f.
+
 specs=varargin;
 n=length(specs);
+
+for k = 1:n
+    if isempty(varargin{k})
+        fullspec = specpatch(varargin{1:n~=k});
+        return
+    end
+end
 
 hflimits = zeros(n,1);
 for k = 1:n

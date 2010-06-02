@@ -4,6 +4,10 @@ function varargout=DTTloadspec(dttdata)
 % with columns f and spectrum.
 % example: [PIT,YAW] = DTTloadspec(dttstuff)
 
+if ischar(dttdata) % if input argument is a filename
+    dttdata = load(dttdata);
+end
+
 f=dttdata(:,1);
 
 for j = 1 : nargout
