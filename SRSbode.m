@@ -19,7 +19,7 @@ if flagIndex
     varargin = {varargin{1:end~=flagIndex}}; % remove options from the arguments
 end
 
-colorlist = { [1 1 1], [1 0 0], [0 1 0], [0 0 1], [1 1 0], [.75 .25 .75], [0 1 1] };
+colorlist = { [1 1 1], [1 0 0], [0 1 0], [0 0 1], [218/255 165/255 32/255], [.75 .25 .75], [0 1 1] };
     
 for j=1:length(varargin)
     M=varargin{j};
