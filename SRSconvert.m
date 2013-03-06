@@ -4,8 +4,9 @@ function M=SRSconvert(F)
 %     nic's 78DtoMAT script on linux systems. If dosbox gives library
 %     errors, it's because MATLAB is using its own c++ libraries.
 %     You must make it use good libraries in /usr/lib for example.
+%     read this for help: http://www.mathworks.com/matlabcentral/newsreader/view_thread/162466
 convertPath = ...
-'"/usr/bin/78DtoMAT"';
+'78DtoMAT';
 
 if(~exist(F,'file')) 
     error(['File ',F,' doesn''t exist!']);
