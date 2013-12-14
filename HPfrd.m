@@ -18,5 +18,6 @@ function frdout = HPfrd(filein)
     end
     
     %frdout = [data(:,1),data(:,realcol)+1i*data(:,imagcol)];
-    frdout = frd(data(:,realcol)+1i*data(:,imagcol),data(:,1),'FrequencyUnit','Hz');
+    frdout = frd(data(:,realcol)+1i*data(:,imagcol),data(:,1),'FrequencyUnit','Hz');\
+    frdout.Name = ['HP data: ' filein];
 end
