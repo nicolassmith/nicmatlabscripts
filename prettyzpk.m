@@ -1,8 +1,12 @@
 function prettyzpk(zpkmodel,frequencyrange)
     tp = 2*pi;
-    flow = frequencyrange(1);
-    fhigh = frequencyrange(2);
-
+    if nargin>1
+        flow = frequencyrange(1);
+        fhigh = frequencyrange(2);
+    else
+        flow = 0;
+        fhigh = Inf;
+    end
     [z,p,k] = zpkdata(zpkmodel);
     
     % uncell
