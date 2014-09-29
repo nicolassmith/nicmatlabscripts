@@ -2,7 +2,7 @@ function frdout = ZIloadTF(datalocation)
     % frd = ZILoadTF(dataloacation)
     % function to load a TF measurement made by ZI HF2 into an frd object
     
-    F_COLUMN = 2;
+    F_COLUMN = 1;
     A_COLUMN = 8;
     PHI_COLUMN = 9;
     
