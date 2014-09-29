@@ -4,9 +4,91 @@ classdef asddata
       frequencies = [];
    end 
    methods
+       % olverloaded builtins
+       function asdout = mtimes(a,b)
+           if isnumeric(a)
+               scalar = a;
+               asdin = b;
+           elseif isnumeric(b)
+               scalar = b;
+               asdin = a;
+           else
+               error('Can''t muliply by nonumeric')
+           end
+           
+           asdout = asddata(scalar*asdin.asd,asdin.frequencies);
+           
+       end
+       % constructor
        function obj = asddata(asd,freq)
+           if length(asd)~=length(freq)
+               error('Frequency vector and asd vector must be same length')
+           end
            obj.asd = asd;
            obj.frequencies = freq;
+       end
+       % other methods
+       function rebinnedAsd=rebin(asdin,frequencies,useLinearInterp)
+           
+           sOld = (asdin.asd).^2;
+           fOld = asdin.frequencies;
+           fNew = frequencies;
+           
+           % adjust shapes
+           if ~isvector(fOld)
+               error('fOld must be a vector')
+           end
+           if ~isvector(fNew)
+               error('fNew must be a vector')
+           end
+           
+           fOld = fOld(:);
+           fNew = fNew(:);
+           
+           % remove DC
+           fOld = fOld(fOld~=0);
+           sOld = sOld(fOld~=0);
+           
+           % numbers
+           Nnew = numel(fNew);
+           
+           % interpolate old spectrum at new points
+           sWarn = warning('off', 'MATLAB:interp1:NaNinY');
+           if nargin > 3 && useLinearInterp
+               sInterp = interp1(fOld, sOld, fNew);
+           else
+               sInterp = exp(interp1(log(fOld), log(sOld), log(fNew)));
+           end
+           warning(sWarn)
+           
+           % mix in interpolated values
+           [fAll, nSort] = sort([fNew; fOld]);
+           [~, nMap] = sort(nSort);
+           
+           % loop over spectra
+           sNew = zeros(Nnew, 1);
+           for m = 1:size(sOld, 2)
+               sAll = [sInterp(:, m); sOld(:, m)];
+               sAll = sAll(nSort);
+               
+               % loop over points
+               for n = 1:Nnew
+                   % integrate under bins
+                   if n == 1
+                       nn = 1:nMap(n);
+                       df = fNew(n) - fAll(1);           % bin width
+                   else
+                       nn = nMap(n - 1):nMap(n);
+                       df = fNew(n) - fNew(n - 1);       % bin width
+                   end
+                   
+                   pNew = trapz(fAll(nn), sAll(nn));   % integrated power
+                   sNew(n, m) = pNew / df;
+                   
+               end
+           end
+           
+           rebinnedAsd = asddata(sqrt(sNew),fNew);
        end
    end
    methods(Static)
