@@ -92,7 +92,7 @@ classdef asddata
        end
    end
    methods(Static)
-       function plot(varargin)
+       function plot(varargin) %stupid must be asddata.plot()
                
                %colorlist = {'k','r','b','g','c','m','y'};
                colorlist = { [1 1 1], [1 0 0], [0 1 0], [0 0 1], [1 1 0], [.75 .25 .75], [0 1 1] };
@@ -114,9 +114,14 @@ classdef asddata
            specs=varargin;
            n=length(specs);
            
+           if n==1 && iscell(specs)
+               specs=specs{1};
+               n=length(specs);
+           end
+           
            for k = 1:n
-               if isempty(varargin{k})
-                   fullspec = asddata.patch(varargin{1:n~=k});
+               if isempty(specs{k})
+                   fullspec = asddata.patch(specs{1:n~=k});
                    return
                end
            end
