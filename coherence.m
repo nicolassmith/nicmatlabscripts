@@ -17,7 +17,7 @@ function [A]= coherence(dataX, dataY, Fs, resolution, windowFunction, ...
 % Ex 1:  A = coherence(data, 16384, 0.125)
 %===============================================
 
-error(nargchk(2, 7, nargin));
+narginchk(2, 7);
 %====================================
 default_rate = 16384;
 default_resolution = 1;

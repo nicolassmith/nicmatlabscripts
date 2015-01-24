@@ -17,7 +17,7 @@ function [A]= asd(data, Fs, resolution, WindowName, ...
 % Ex 1:  A = asd(data, 16384, 0.125)
 %===============================================
 
-error(nargchk(1, 6, nargin));
+narginchk(1, 6);
 %====================================
 default_rate = 16384;
 default_resolution = 1;
