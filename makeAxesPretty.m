@@ -11,10 +11,10 @@ function makeAxesPretty(haxes)
     % make a grid
     grid on
     % set fonts for labels and tick marks
-    set([htitle,hxlabel,hylabel,gca],'FontSize',25,'LineWidth',3,'FontWeight','bold')
+    set([htitle,hxlabel,hylabel,gca],'FontSize',20,'LineWidth',3,'FontWeight','bold','FontName'   , 'Times')
     % set thick line widths for curves
     set(get(haxes,'Children'),'LineWidth',3)
     % white background
     set(get(haxes,'Parent'),'Color','White')
-
+    set(gcf,'Renderer','painters');
 end
