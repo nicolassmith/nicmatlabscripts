@@ -13,7 +13,7 @@ classdef asddata
                scalar = b;
                asdin = a;
            else
-               error('Can''t muliply by nonumeric')
+               error('ASD must be multiplied by numeric')
            end
            
            asdout = asddata(scalar*asdin.asd,asdin.frequencies);
@@ -21,13 +21,22 @@ classdef asddata
        end
        % constructor
        function obj = asddata(asd,freq)
+           if nargin == 1
+               freq = asd.f(:);
+               asd = asd.x(:);
+           end
            if length(asd)~=length(freq)
                error('Frequency vector and asd vector must be same length')
            end
-           obj.asd = asd;
-           obj.frequencies = freq;
+           obj.asd = asd(:);
+           obj.frequencies = freq(:);
        end
        % other methods
+       function filtAsd = filter(asdin,sys)
+                   resp = freqresp(sys,2*pi*asdin.frequencies);
+                   
+                   filtAsd = asddata(asdin.asd.*abs(squeeze(resp)),asdin.frequencies);
+       end
        function rebinnedAsd=rebin(asdin,frequencies,useLinearInterp)
            
            sOld = (asdin.asd).^2;
