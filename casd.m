@@ -77,4 +77,4 @@ end
 
 
 A = struct('Name','Coherence',...
-           'Axy',sqrt(abs(Pxy)),'f',F);
+           'Pxy',Pxy,'Axy',sqrt(abs(Pxy)),'f',F);

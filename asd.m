@@ -72,5 +72,5 @@ h = spectrum.welch(WindowName,SegmentLength,OverlapPercent);
 Hpsd = psd(h,data,'Fs',Fs);
 
 A = struct('Name','Amplitude Spectral Density',...
-           'x',sqrt(Hpsd.Data),'f',Hpsd.Frequencies);
+           'x',sqrt(Hpsd.Data),'Pxx',Hpsd.Data,'f',Hpsd.Frequencies);
 
