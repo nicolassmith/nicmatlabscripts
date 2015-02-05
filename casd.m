@@ -76,5 +76,5 @@ end
 [Pxy,F] = cpsd(dataX,dataY,windowFunction(SegmentLength),noverlap,SegmentLength,Fs);
 
 
-A = struct('Name','Coherence',...
+A = struct('Name','Cross Spectral Density',...
            'Pxy',Pxy,'Axy',sqrt(abs(Pxy)),'f',F);
